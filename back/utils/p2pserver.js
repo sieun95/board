@@ -13,42 +13,47 @@ const getPeers = () => {
 const initP2PServer = (p2pPort) => {
     const server = new ws.WebSocketServer({ port: p2pPort });
 
-    server.on('connection', (ws, request) => {
+    server.on('connection', (ws_1, request) => {
         console.log("req " + request.headers);
-        initConnection(ws);
+        initConnection(ws_1);
     })
 
     console.log('listening P2PServer Port : ', p2pPort);
 }
 
-const initConnection = (ws) => {
-    sockets.push(ws);
-    initMessgaeHandler(ws);
+const initConnection = (ws_1) => {
+    sockets.push(ws_1);
+    initMessgaeHandler(ws_1);
 
-    write(ws, queryAllMessage());
+    write(ws_1, queryAllMessage());
 }
 
 const connectToPeer = (newPeer) => {
-    const ws = new ws.WebSocket(newPeer);
-    ws.on('open', () => {
-        initConnection(ws);
+    const ws_1 = new ws.WebSocket(newPeer);
+    ws_1.on('open', () => {
+        initConnection(ws_1);
         console.log('Connect peer : ', newPeer);
         return true;
     })
-    ws.on('error', () => {
-        console.log('Fail to Connection peer : ', ws.remoteAddres);
+    ws_1.on('error', () => {
+        console.log('Fail to Connection peer : ', ws_1.remoteAddres);
         return false;
     })
 }
 
-const initMessgaeHandler = (ws) => {
-    ws.on('message', (data) => {
+const initMessgaeHandler = (ws_1) => {
+    ws_1.on('message', (data) => {
         const message = JSON.parse(data);
         switch (message.type) {
-            // case MessageType.QUERY_LATEST:
-            //     // 최신 블록을 요청 받았을 때
-            //     // ws.send(JSON.stringify(responseLatestMessage()))
-            //     break;
+            case MessageType.RESPONSE_MESSAGE: // 메세지 받았을때
+            console.log("메세지를 받았습니다")
+            break;
+            case MessageType.SENT_MESSAGE:
+                // 메세지 보냈을때
+                console.log("msgHandler50 : ", message.msg)
+                broadcasting(ws_1, message.msg)
+                // ws.send(JSON.stringify(broadcasting()))
+                break;
             // case MessageType.QUERY_ALL:
             //     // 모든 블록 정보를 요청 받았을 때
             //     // ws.send(JSON.stringify(responseAllMessage()));
@@ -168,15 +173,16 @@ const queryAllMessage = () => {
 //     })
 // }
 
-const write = (ws, message) => {
-    // console.log(message);
-    ws.send(JSON.stringify(message));
+const write = (ws_1, message) => {
+    console.log(message);
+    ws_1.send(JSON.stringify(message));
 }
 
 // send 원장
 const broadcasting = (message) => {
+    console.log("broadcasting: ", message)
     sockets.forEach((socket) => {
-        write(socket, message);
+        write(socket, message.message);
     })
 }
 

@@ -12,6 +12,7 @@ router.use('/board', boardRouter);
 router.use('/userInfo', userInfoRouter);
 
 router.use('/mypage', mypageRouter);
+
 router.use('/chat', chatRouter);
 
 module.exports = router;

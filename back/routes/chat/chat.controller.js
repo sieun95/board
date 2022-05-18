@@ -3,18 +3,20 @@ const p2p = require('../../utils/p2pserver.js');
 // { connectToPeer, getPeers, broadcasting }
 
 
-const connectToPeer = (req, res) => {
-    const { ipAddress, port } = req.body
+const addPeer = (req, res) => {
+    console.log(req.body)
+    const ipAddress = req.body.ipAddress
+    const port = req.body.port
     connectedIP = ipAddress;
 
     let fullAddress = "ws://" + ipAddress + ":" + port;
     console.log(fullAddress)
     console.log("connectToPeer")
-    res.send(connectToPeer(fullAddress));
+    res.send(p2p.connectToPeer(fullAddress));
 };
 
 const getPeers = (req, res) => {
-    res.send(getPeers());
+    res.send(p2p.getPeers());
 };
 
 const sendMessage = (req, res) => {
@@ -23,12 +25,13 @@ const sendMessage = (req, res) => {
         "type": parseInt(req.body.type)
     }
     // console.log(data)
-    broadcasting(data);
+    p2p.broadcasting(data);
+    res.send(data)
 };
 
 
 module.exports = {
-    connectToPeer,
+    addPeer,
     getPeers,
     sendMessage,
     // chatting,
