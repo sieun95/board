@@ -14,4 +14,4 @@ app.use(router);
 
 app.listen(9400, () => {
     console.log('http://localhost:9400')
-})
+});
