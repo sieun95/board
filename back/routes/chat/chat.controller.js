@@ -1,39 +1,16 @@
 const pool = require('../../db');
-const p2p = require('../../utils/p2pserver.js');
 // { connectToPeer, getPeers, broadcasting }
 
 
-const addPeer = (req, res) => {
-    console.log(req.body)
-    const ipAddress = req.body.ipAddress
-    const port = req.body.port
-    connectedIP = ipAddress;
-
-    let fullAddress = "ws://" + ipAddress + ":" + port;
-    console.log(fullAddress)
-    console.log("connectToPeer")
-    res.send(p2p.connectToPeer(fullAddress));
+const chatting = (req, res) => {
+    // console.log(req.body)
+    res.send('chatting')
 };
 
-const getPeers = (req, res) => {
-    res.send(p2p.getPeers());
-};
-
-const sendMessage = (req, res) => {
-    let data = {
-        "message": req.body.msg,
-        "type": parseInt(req.body.type)
-    }
-    // console.log(data)
-    p2p.broadcasting(data);
-    res.send(data)
-};
 
 
 module.exports = {
-    addPeer,
-    getPeers,
-    sendMessage,
+    chatting
     // chatting,
 }
 
