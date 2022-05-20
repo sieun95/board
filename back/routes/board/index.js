@@ -3,8 +3,14 @@ const router = express.Router();
 const boardController = require('./board.controller');
 
 router.get('/view', boardController.view);
-router.get('/write', boardController.write);
-router.get('/modify', boardController.modify);
+
+router.post('/write', boardController.write);
+
+router.post('/modify', boardController.modify);
+
 router.get('/list', boardController.list);
+
+// router.post('/view', boardController.viewAction);
+
 
 module.exports = router;
