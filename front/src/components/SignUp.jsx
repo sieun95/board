@@ -57,7 +57,7 @@ export default function SignUp() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await axios.post("http://localhost:9400/signUp",userInfo)
+    const result = await axios.post("http://localhost:9400/auth/signUp",userInfo)
     navigate("/")
   };
 

@@ -43,7 +43,7 @@ export default function LogIn() {
       pwd: data.get('pwd'),
     };
     console.log(formData)
-    const result = await axios.post("http://localhost:9400/userInfo/login",formData)
+    const result = await axios.post("http://localhost:9400/auth/login",formData)
     alert(result.data)
     localStorage.setItem("email",result.data.email)   
     navigate("/")
