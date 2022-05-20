@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -31,23 +31,32 @@ const theme = createTheme();
 export default function SignUp() {
 
   const [userInfo,setUserInfo] = useState({
-    email : '',
-    password : ''
+    userId : '',
+    pwd : ''
   })
 
-  // const handleChange = (e) => {
+  const [userid,setUserid] = useState("")
+  const [password,setPassword] = useState("")
 
-  // }
+
+  const handleChange = (e) => {
+    const {name,value} = e.target
+    setUserInfo({
+      ...userInfo,
+      [name]:value
+    })
+  }
+
+  useEffect(() => {
+    setUserid(userInfo.userId);
+    setPassword(userInfo.pwd);
+}, [userInfo]); 
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // event.target.name
-    // console.log(data)
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
+    console.log(userInfo)
   };
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -94,10 +103,12 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth
-                  id="email"
+                  id="userid"
                   label="ID"
                   name="userId"
                   autoComplete="email"
+                  value={userid}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -109,6 +120,8 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>

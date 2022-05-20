@@ -37,11 +37,12 @@ export default function LogIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData(event.target);
+    const data = new FormData(event.target); //current Target
     const formData = {
       email: data.get('email'),
       password: data.get('password'),
     };
+    console.log(formData)
     const result = await axios.post("http://localhost:9400/userInfo/login",formData)
     alert(result.data)
     localStorage.setItem("email",result.data.email)   
@@ -97,7 +98,7 @@ export default function LogIn() {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Log In
             </Button>
             <Grid container>
               <Grid item xs>
