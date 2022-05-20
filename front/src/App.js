@@ -1,10 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Main from "./component/Main"
-import LogIn from './component/LogIn';
-import SignUp from './component/SignUp';
-import ResponsiveAppBar from './component/ResponsiveAppBar';
+import Main from "./components/Main"
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
 import Chat from './components/Chat'
 
 
