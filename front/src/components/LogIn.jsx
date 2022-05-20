@@ -37,10 +37,10 @@ export default function LogIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData(event.target); //current Target
+    const data = new FormData(event.currentTarget); //current Target
     const formData = {
-      email: data.get('email'),
-      password: data.get('password'),
+      userId: data.get('userId'),
+      pwd: data.get('pwd'),
     };
     console.log(formData)
     const result = await axios.post("http://localhost:9400/userInfo/login",formData)
