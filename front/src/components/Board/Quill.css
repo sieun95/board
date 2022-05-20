@@ -1,0 +1,28 @@
+.ql-snow .ql-stroke {
+  stroke: white;
+}
+
+.ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+  fill: white;
+}
+
+.ql-snow .ql-picker {
+  color: white;
+}
+
+.ql-snow .ql-picker-options {
+  background-color: black;
+}
+
+.ql-container {
+  height: 80%;
+}
+
+.ql-container.ql-snow {
+  border: none;
+}
+
+.ql-toolbar.ql-snow {
+  border: none;
+  border-bottom: 1px solid #ccc;
+}
