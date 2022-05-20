@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const boardController = require('./board.controller');
 
-router.get('/view', boardController.view);
+router.get('/view/:idx', boardController.view);
 
 router.post('/write', boardController.write);
 

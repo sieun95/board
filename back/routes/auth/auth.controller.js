@@ -16,7 +16,6 @@ const signUp = async (req, res) => {
     }catch(e) {
         console.error(e)
     } 
-    
 };
 
 
@@ -37,7 +36,6 @@ const login = async (req, res) => {
     catch(e) {
         console.error(e)
     }
-  
 };
 
 module.exports = {
