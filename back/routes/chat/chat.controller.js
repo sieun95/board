@@ -1,17 +1,15 @@
 const pool = require('../../db');
-// { connectToPeer, getPeers, broadcasting }
 
 
 const chatting = (req, res) => {
-    // console.log(req.body)
+    console.log(req.body)
     res.send('chatting')
 };
 
 
 
 module.exports = {
-    chatting
-    // chatting,
+    chatting,
 }
 
 

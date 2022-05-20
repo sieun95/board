@@ -10,7 +10,6 @@ router.post('/modify', boardController.modify);
 
 router.get('/list', boardController.list);
 
-// router.post('/view', boardController.viewAction);
 
 
 module.exports = router;

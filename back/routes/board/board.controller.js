@@ -40,21 +40,10 @@ const modify = async (req, res) => {
     }
 };
 
-// const viewAction = async (req, res) => {
-//     try {
-//         const [result] = await pool.query(`in`)
-//     } catch(e) {
-//         console.error(e)
-//     }
-//     res.send('viewAction')
-// }
-
-
 module.exports = {
     list,
     view,
     write,
     modify,
-    // viewAction,
 }
 
