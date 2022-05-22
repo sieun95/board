@@ -1,4 +1,6 @@
-USE DATABASE
+USE DATABASE web;
+
+DROP TABLE userInfo;
 
 CREATE TABLE userInfo(  
     `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -12,17 +14,28 @@ DESC userInfo;
 
 INSERT INTO `userInfo`(userId, pwd) VALUES ('test', '1234');
 
-
+DROP TABLE `board`;
 
 CREATE TABLE board(  
     `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userId` VARCHAR(255) NOT NULL,
     `subject` VARCHAR(255) NOT NULL,
-    `content` VARCHAR(255) NOT NULL
+    `content` VARCHAR(255) NOT NULL,
+    `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL,
+    `hit` INT(11) DEFAULT 0 NOT NULL
 );
 
 DESC board;
 
-INSERT INTOf
+SELECT * FROM board;
+
+INSERT INTO board(userId, subject, content) VALUES('test', 'test', '안녕하세요 테스트입니다~~');
+
+CREATE TABLE boardComment(
+    `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `cUser` VARCHAR(255) NOT NULL,
+    `cContent` VARCHAR(255) NOT NULL,
+    `cLike` INT(11) DEFAULT 0 NOT NULL
+)
 
 
