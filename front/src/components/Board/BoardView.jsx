@@ -29,8 +29,8 @@ const BoardView = () => {
 
     const callApi = async() => {
         const {data} = await axios.get(`http://localhost:9400/board/view/${viewIdx}`);
-        const [datas] = data
-        setInputData(datas)
+        // const [datas] = data
+        setInputData(data)
     }
     
     useEffect(() => {
