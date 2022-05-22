@@ -12,16 +12,39 @@ const list = async (req, res) => {
 
 const view = async (req, res) => {
     console.log('board view')
-    console.log(req.params)
+    console.log(req.body)
+    const { idx, like, userId} = req.body
+    // 1. userID정보 가지고오기
+    // 2. userID정보 업데이트하기
     try {
-        const [result] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
-        const like = 0
+        const [user] = await pool.query(`SELECT * FROM userInfo WHERE userId = '${userId}'`)
+        console.log(user[0].bLike)
+        // console.log(JSON.parse(user[0].bLike))
+        let bLike = JSON.parse(user[0].bLike);
+      
+            // 포함하고 있을때 배열에서 제거
+            if(bLike.includes(Number(idx))) {
+                bLike = bLike.filter((likeCheck) => {
+                    if(likeCheck !== Number(idx)) return likeCheck
+                });
+                console.log("filtered1: ", bLike);
+            }
+            else {
+                bLike.push(Number(idx))
+                console.log("filtered2: ", bLike);
+            }
+            bLike = JSON.stringify(bLike)
         
-        const [checkLike] = await pool.query(`UPDATE `)
-        res.json(result);
-    } catch(e) {
+            // 포함 x => 배열에 추가
+            await pool.query(`UPDATE userInfo SET bLike = '${bLike}' WHERE userId = '${userId}'`)
+            const [[result]] = await pool.query(`SELECT * FROM board WHERE idx = '${req.body.idx}'`)
+            
+            res.json(result);
+        } 
+    catch(e) {
         console.error(e)
     }
+
 };
 
 const write = async (req, res) => {

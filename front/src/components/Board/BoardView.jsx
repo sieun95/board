@@ -31,11 +31,10 @@ const BoardView = () => {
 
     const callApi = async() => {
         const {data} = await axios.get(`http://localhost:9400/board/view/${viewIdx}`);
-        const [datas] = data
-        setInputData(datas)
+        setInputData(data)
 
         // 해당글에 대한 userInfo 좋아요 정보를 이용해서 처음에 표시해줌
-        const userBlike = await axios.get(`http://localhost:9400/board/`)
+        // const userBlike = await axios.get(`http://localhost:9400/board/`)
         // userBlike
     }
     
