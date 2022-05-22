@@ -50,7 +50,8 @@ const modify = async (req, res) => {
 
 const comment = async (req,res) => {
     try{
-        const [comment] = await pool.query(`SELECT * FROM boardComment`)
+        
+        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE`)
         console.log(comment)
         res.json(comment)
     }
@@ -61,10 +62,9 @@ const comment = async (req,res) => {
 }
 
 const commentAction = async (req, res) => {
-    console.log('boardCommentAction')
-    console.log(req.body)
     try{
-        const { idx, cUser, cContent, cLike } = req.body
+        const { idx, cUser, cContent, boardIdx, cLike } = req.body
+        const [board] = await pool.query(`SELECT * FROM board WHERE idx = '${boardIdx}'`)
         const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent) VALUES('${cUser}', '${cContent}')`)
         res.json('comment success')
     }

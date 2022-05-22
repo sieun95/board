@@ -9,8 +9,9 @@ router.post('/modify', boardController.modify);
 
 router.get('/list', boardController.list);
 
-router.get('/comment', boardController.comment);
 router.post('/comment', boardController.commentAction);
+router.get('/comment', boardController.comment);
+
 
 
 
