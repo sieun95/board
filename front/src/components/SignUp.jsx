@@ -58,7 +58,11 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const result = await axios.post("http://localhost:9400/auth/signUp",userInfo)
-    navigate("/login")
+    if(result.data === "signUp success"){
+      alert("회원가입 완료")
+      navigate("/login")
+    }
+    else alert("이미 존재하는 아이디입니다")
   };
 
 
