@@ -33,8 +33,6 @@ const Comment = ({viewIdx, cUser})=>{
         e.preventDefault();
         const input = e.target.cContent
         const cContent = input.value
-        console.log(cContent)
-        console.log(viewIdx)
         const result = await axios.post("http://localhost:9400/board/comment",{cUser,"boardIdx":viewIdx,"cContent":cContent})
         setComments([...comments,{cUser, cContent:cContent, cLike:0}] )
         input.value = ""

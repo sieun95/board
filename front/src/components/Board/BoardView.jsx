@@ -5,6 +5,7 @@ import { Button, IconButton, Paper} from '@mui/material';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
+import CircularProgress from '@mui/material/CircularProgress';
 import Comment from './Comment';
 
 const ColorButton = styled(Button)(({ theme }) => ({
@@ -24,9 +25,10 @@ const BoardView = () => {
     const viewIdx = parseInt(params.idx)
 
     const userId = localStorage.getItem("userId")
-
+    
     const [inputData, setInputData] = useState({});
     const [blike, setBlike] = useState(false);
+    const [loading,setLoading] = useState(true)
 
 
     const callApi = async() => {
@@ -36,6 +38,7 @@ const BoardView = () => {
         // 해당글에 대한 userInfo 좋아요 정보를 이용해서 처음에 표시해줌
         // const userBlike = await axios.get(`http://localhost:9400/board/`)
         // userBlike
+        setLoading(false)
     }
     
     useEffect(() => {
@@ -51,7 +54,21 @@ const BoardView = () => {
 
 
 	return (
-    <Paper sx={{ maxWidth: "80%", height:"45rem", margin: "auto" }}>
+    <>
+    {loading 
+      ?
+        <Box
+          sx={{
+            marginTop: 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+        <CircularProgress /> 
+        </Box>
+      :
+      <Paper sx={{ maxWidth: "80%", height:"45rem", margin: "auto" }}>
       <br />
       <Box style={{marginLeft: "2%", fontSize:20, fontWeight: 1000}} >Subject</Box>
       <li>{inputData.subject}</li>
@@ -81,8 +98,9 @@ const BoardView = () => {
       <ColorButton onClick={()=>navigate(`/board/list/1`)} variant="text" >
         목록으로
       </ColorButton>
-    </Paper>
-    
+      </Paper>
+    }
+    </>
 	);
 };
 

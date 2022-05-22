@@ -7,7 +7,6 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 const CommentList = ({comments})=>{
-    console.log(comments)
     return(
         <>
         <TableContainer component={Paper}>
