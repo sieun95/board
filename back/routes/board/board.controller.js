@@ -15,6 +15,9 @@ const view = async (req, res) => {
     console.log(req.params)
     try {
         const [result] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
+        const like = 0
+        
+        const [checkLike] = await pool.query(`UPDATE `)
         res.json(result);
     } catch(e) {
         console.error(e)
@@ -50,11 +53,11 @@ const modify = async (req, res) => {
 
 const comment = async (req,res) => {
     try{
-        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE boardIdx = '${req.params.idx}'`)
+        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE idx = '${req.params.idx}'`)
         
         console.log('1 :')
         console.log(req.params.idx)
-        res.json('test')
+        res.json(comment)
     }
     catch(e) {
         console.error(e)
