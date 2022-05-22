@@ -10,7 +10,7 @@ router.post('/modify', boardController.modify);
 router.get('/list', boardController.list);
 
 router.post('/comment', boardController.commentAction);
-router.get('/comment', boardController.comment);
+router.get('/comment/:idx', boardController.comment);
 
 
 

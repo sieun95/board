@@ -50,22 +50,24 @@ const modify = async (req, res) => {
 
 const comment = async (req,res) => {
     try{
+        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE boardIdx = '${req.params.idx}'`)
         
-        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE`)
-        console.log(comment)
-        res.json(comment)
+        console.log('1 :')
+        console.log(req.params.idx)
+        res.json('test')
     }
     catch(e) {
         console.error(e)
     }
-
 }
 
 const commentAction = async (req, res) => {
     try{
         const { idx, cUser, cContent, boardIdx, cLike } = req.body
-        const [board] = await pool.query(`SELECT * FROM board WHERE idx = '${boardIdx}'`)
-        const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent) VALUES('${cUser}', '${cContent}')`)
+        const lCount = await pool.query('')
+        console.log('2 = ')
+        console.log(boardIdx)
+        const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
         res.json('comment success')
     }
     catch(e) {
