@@ -54,32 +54,6 @@ export default function Main () {
             <Typography component="h1" variant="h5">
               메인 안 같은 메인
             </Typography>
-            <Box noValidate sx={{ mt: 3 }}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                <Button
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={()=>navigate("/signup")}
-              >
-                회원가입
-              </Button>
-                </Grid>
-                <Grid item xs={12}>
-                <Button
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-                onClick={()=>navigate("/login")}
-              > 
-                로그인
-              </Button>
-                </Grid>
-              </Grid>
-              <Grid container justifyContent="flex-end">
-              </Grid>
-            </Box>
           </Box>
           <Copyright sx={{ mt: 5 }} />
         </Container>
