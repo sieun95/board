@@ -23,11 +23,11 @@ const view = async (req, res) => {
 
 const write = async (req, res) => {
     try{
-        const { userId, subject, content } = req.body.data
+        const { userId, subject, content } = req.body
         console.log('board write')
-        console.log(req.body.data)
+        console.log(req.body)
         const [result] = await pool.query(`INSERT INTO board(userId, subject, content) VALUES('${userId}', '${subject}', '${content}')`)
-        res.json(result.data)
+        res.json(result)
     }
     catch(e) {
         console.error(e)
@@ -38,7 +38,7 @@ const modify = async (req, res) => {
     console.log('modify req.body')
     console.log(req.body)
     try{
-        const { subject, content, idx, date } = req.body
+        const { subject, content, idx} = req.body
         const [result] = await pool.query(`UPDATE board SET subject='${subject}', content='${content}' WHERE idx='${idx}'`)
         res.send('수정된다 확인했다')
     }
