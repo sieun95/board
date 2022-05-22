@@ -26,7 +26,6 @@ const login = async (req, res) => {
     try{
         const [idResult] = await pool.query(`SELECT * FROM userInfo WHERE userId='${userId}'`)
         const [pwdResult] = await pool.query(`SELECT * FROM userInfo WHERE pwd='${pwd}'`)
-        // const [exist] = await pool.query(`SELECT * FROM userInfo WHERE userId = '${userId}'`);
         if(idResult.length === 0 || pwdResult.length === 0) {
             res.send('login error')
         }else{

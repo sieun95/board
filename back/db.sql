@@ -1,4 +1,4 @@
-USE DATABASE `web`;
+USE DATABASE web;
 
 DROP TABLE userInfo;
 
@@ -30,5 +30,12 @@ DESC board;
 SELECT * FROM board;
 
 INSERT INTO board(userId, subject, content) VALUES('test', 'test', '안녕하세요 테스트입니다~~');
+
+CREATE TABLE boardComment(
+    `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `cUser` VARCHAR(255) NOT NULL,
+    `cContent` VARCHAR(255) NOT NULL,
+    `cLike` INT(11) DEFAULT 0 NOT NULL
+)
 
 
