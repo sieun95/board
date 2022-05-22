@@ -44,9 +44,13 @@ export default function LogIn() {
     };
     console.log(formData)
     const result = await axios.post("http://localhost:9400/auth/login",formData)
-    alert(result.data)
-    localStorage.setItem("email",result.data.email)   
-    navigate("/")
+    if(result.data === "login success"){
+      localStorage.setItem("userId",data.get("userId"))   
+      navigate("/")
+      navigate(0)
+    }
+    else alert("아이디 또는 패스워드가 올바르지 않음")
+    
   };
 
   return (
