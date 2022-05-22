@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 
 function Chat() {
   let [ current_room, setCurrent_room ] = useState('')
-  const socket = io.connect(`http://localhost:9400/chatting`, {
+  const socket = io.connect(`http://localhost:9400/chat`, {
     transports: ['websocket']
   })
 

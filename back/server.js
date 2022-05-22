@@ -23,7 +23,7 @@ const io = require('socket.io')(server,{
 
 const chat = io.of('/chat')
 
-// console.log(chat)
+console.log(chat)
 chat.on('connection', socket =>{
     let c_id
     socket.on('joinRoom', chatRoom => {
