@@ -15,7 +15,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 const StyledTableRow = styled(TableRow)(({theme}) => ({
     height: "3.12rem",
     '&:hover': {
-      backgroundColor: grey[800],
+      backgroundColor: grey[300],
    },
 }));
 
@@ -27,7 +27,7 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 const ColorTableCell = styled(TableCell)(({ theme }) => ({
-  color: theme.palette.common.white,
+  // color: theme.palette.common.white,
   fontSize: 20
 }));
 
@@ -115,7 +115,7 @@ export default function BoardList() {
     <Paper sx={{  maxWidth: "80%", margin: "auto" }}>
       <br />
       <TableContainer sx={{ minHeight: "35rem", maxWidth: "98%", margin: "auto" }}>
-        <Table size="small" sx={{ maxWidth: "98%", margin: "auto", backgroundColor: "black"}} aria-label="simple table">
+        <Table size="small" sx={{ maxWidth: "98%", margin: "auto"}} aria-label="simple table">
           <TableHead sx={{ backgroundColor: "white" }}>
             <TableRow >
               <TableCell sx={{ fontWeight:1000 , fontSize: 15 }}>제목</TableCell>
