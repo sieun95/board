@@ -49,6 +49,11 @@ export default function BoardList() {
   const callApi = async() => {
     const response = await axios.get("http://localhost:9400/board/list");
     setInputData(response.data.reverse())
+    // const {data} = await axios.get("http://localhost:9400/like");
+    // data.forEach((likes)=>{
+    //   if(likes.includes(``))
+    // })
+
     setLoading(false)
   }
   

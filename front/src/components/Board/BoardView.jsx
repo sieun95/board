@@ -16,7 +16,6 @@ const ColorButton = styled(Button)(({ theme }) => ({
 }));
 
 
-const fieldStyle = {border: "none" ,background: "white" , resize : "none", width : "96.04%", marginLeft: "2%", marginTop:"10px", marginBottom:"10px"}
 
 const BoardView = () => {
     const  navigate = useNavigate(); 
@@ -25,10 +24,12 @@ const BoardView = () => {
     const viewIdx = parseInt(params.idx)
 
     const userId = localStorage.getItem("userId")
+    const pwd = localStorage.getItem("pwd")
     
     const [inputData, setInputData] = useState({});
-    const [blike, setBlike] = useState(false);
+    const [isbLike, setIsbLike] = useState(false);
     const [loading,setLoading] = useState(true)
+    const [likeCnt, setLikeCnt] = useState(0)
 
 
     const callApi = async() => {
@@ -36,19 +37,33 @@ const BoardView = () => {
         setInputData(data)
 
         // 해당글에 대한 userInfo 좋아요 정보를 이용해서 처음에 표시해줌
-        // const userBlike = await axios.get(`http://localhost:9400/board/`)
-        // userBlike
+        const {data:{bLike}} = await axios.post(`http://localhost:9400/auth/login`,{userId,pwd})
+        
+        // console.log(typeof bLike[0]) //string
+        if(bLike){
+          setIsbLike(bLike.includes(`${viewIdx}`))
+        }
+        const response = await axios.get("http://localhost:9400/board/like");
+        let cnt = 0;
+        response.data.forEach((likes)=>{
+          if(likes.bLike){
+            if(likes.bLike.includes(`${viewIdx}`)){
+              cnt ++
+            }
+          }
+        })
+        setLikeCnt(cnt)
         setLoading(false)
     }
     
     useEffect(() => {
         callApi();
-    },[]);
+    },[likeCnt,isbLike]);
 
     const clickLike = async() => {
-      const {data} = await axios.post(`http://localhost:9400/board/like/${viewIdx}`,{userId,"idx":viewIdx})
-      console.log(data)
-
+      await axios.post(`http://localhost:9400/board/view`,{userId,"idx":viewIdx})
+      setIsbLike(!isbLike)
+      
       // 누를때 마다 상태를 바꿔준다
     }
 
@@ -80,7 +95,7 @@ const BoardView = () => {
       <li>{inputData.date} </li>
       <Box style={{marginLeft: "2%", fontSize:20, fontWeight: 1000}} >hit</Box>
       <li>{inputData.hit} </li>
-      {!blike
+      {!isbLike
         ? <ColorButton onClick={clickLike} variant="text">
           좋아요
         </ColorButton>
@@ -88,6 +103,7 @@ const BoardView = () => {
           좋아요 취소
         </ColorButton>
       }
+      <div>{likeCnt}</div>
       
 
       <Comment viewIdx={viewIdx} cUser={userId} />
