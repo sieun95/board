@@ -20,7 +20,8 @@ const CommentList = ({comments})=>{
             </TableRow>
           </TableHead>
           <TableBody>
-            {comments.map((comment) => (
+            {
+            comments.map((comment) => (
               <TableRow
                 key={comment.idx}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
