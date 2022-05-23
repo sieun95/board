@@ -31,5 +31,5 @@ io.on('connection', socket => {
         io.emit('message', { name, message })
         sockets.push(sockets.length)
     })
-    sockets.push(sockets.length)
+    // console.log(sockets.length)
 })
