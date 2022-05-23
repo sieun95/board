@@ -102,7 +102,6 @@ const comment = async (req,res) => {
 const commentAction = async (req, res) => {
     try{
         const { idx, cUser, cContent, boardIdx, cLike } = req.body
-        const lCount = await pool.query('')
         console.log('2 = ')
         console.log(boardIdx)
         const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
