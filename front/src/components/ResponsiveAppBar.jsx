@@ -26,6 +26,7 @@ const ResponsiveAppBar = () => {
 
   const logOut = ()=>{
     localStorage.removeItem("userId")
+    localStorage.removeItem("pwd")
     setUserId("")
     navigate("/")
   }

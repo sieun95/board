@@ -20,16 +20,14 @@ const signUp = async (req, res) => {
 
 
 const login = async (req, res) => {
-    console.log("login req.body")
-    console.log(req.body)
     const { userId, pwd } = req.body
     try{
-        const [idResult] = await pool.query(`SELECT * FROM userInfo WHERE userId='${userId}'`)
-        const [pwdResult] = await pool.query(`SELECT * FROM userInfo WHERE pwd='${pwd}'`)
-        if(idResult.length === 0 || pwdResult.length === 0) {
+        const [[result]] = await pool.query(`SELECT * FROM userInfo WHERE userId='${userId}' AND pwd='${pwd}'`)
+        if(result.length === 0) {
             res.send('login error')
         }else{
-            res.send('login success')
+            console.log(result)
+            res.json(result)
         }
     }
     catch(e) {
