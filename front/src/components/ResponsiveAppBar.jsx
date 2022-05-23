@@ -111,6 +111,7 @@ const ResponsiveAppBar = () => {
               >
                 게시판
             </Button>
+            {(userId === undefined || userId === null) ? null : <div style={{paddingTop:18}}>{userId}님 환영합니다</div> }
           </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
