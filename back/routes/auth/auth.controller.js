@@ -7,7 +7,7 @@ const signUp = async (req, res) => {
     try{
         const [exist] = await pool.query(`SELECT * FROM userInfo WHERE userId = '${userId}'`);
         if (exist.length === 0) {
-            await pool.query(`INSERT INTO userInfo(userId, pwd) VALUES('${userId}', '${pwd}')`)
+            await pool.query(`INSERT INTO userInfo(userId, pwd, blike) VALUES('${userId}', '${pwd}', '[]')`)
             res.send('signUp success')
         } else {
             console.log('signup id already exists')
