@@ -10,6 +10,7 @@ import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
 import SearchIcon from '@mui/icons-material/Search';
 import { Box } from '@mui/system';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const StyledTableRow = styled(TableRow)(({theme}) => ({
     height: "3.12rem",
@@ -30,15 +31,17 @@ const ColorTableCell = styled(TableCell)(({ theme }) => ({
   fontSize: 20
 }));
 
+
+
 export default function BoardList() {
-  let navigate = useNavigate(); 
+  const navigate = useNavigate(); 
   
   let params = useParams();
   const pagenum = parseInt(params.page)
 
   const userId = localStorage.getItem("userId")
 
- 
+  const [loading,setLoading] = useState(true)
 
   const [inputData, setInputData] = useState([]);
 
@@ -46,11 +49,12 @@ export default function BoardList() {
   const callApi = async() => {
     const response = await axios.get("http://localhost:9400/board/list");
     setInputData(response.data.reverse())
+    setLoading(false)
   }
   
   useEffect(() => {
     callApi();
-  },[]);
+  },[loading]);
 
   const Paging = () => {
     const [page, setPage] = useState(parseInt(params.page));
@@ -86,8 +90,22 @@ export default function BoardList() {
   }
 
   const pagelist = inputData.slice((pagenum-1)*10,pagenum*10)
-
+  
   return (
+    <>
+    {loading 
+    ? 
+          <Box
+            sx={{
+              marginTop: 8,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+          <CircularProgress /> 
+          </Box>
+    :
     <>
     <Paper sx={{  maxWidth: "80%", margin: "auto" }}>
       <br />
@@ -143,9 +161,9 @@ export default function BoardList() {
       </Box>
       : null
       }
-        
     </Paper>
     <Paging />
+    </>}
     </>
   );
 }

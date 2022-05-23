@@ -14,7 +14,7 @@ const view = async (req, res) => {
     console.log('board view')
     console.log(req.params)
     try {
-        const [result] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
+        const [[result]] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
         res.json(result);
     } catch(e) {
         console.error(e)
