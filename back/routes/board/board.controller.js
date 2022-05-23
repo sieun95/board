@@ -15,6 +15,7 @@ const view = async (req, res) => {
     console.log(req.params)
     try {
         const [[result]] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
+        await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = '${req.params.idx}'`)
         res.json(result);
     } catch(e) {
         console.error(e)
@@ -25,7 +26,7 @@ const view = async (req, res) => {
 const viewAction = async (req, res) => {
     console.log('board view')
     console.log(req.body)
-    const { idx, like, userId} = req.body
+    const { idx, userId} = req.body
     // 1. userID정보 가지고오기
     // 2. userID정보 업데이트하기
     try {
@@ -77,9 +78,9 @@ const modify = async (req, res) => {
     console.log(req.body)
     try{
         const { idx, subject, content} = req.body
-        const [result] = await pool.query(`UPDATE board SET subject='${subject}', content='${content}' WHERE idx='${idx}'`)
+        await pool.query(`UPDATE board SET subject='${subject}', content='${content}' WHERE idx='${idx}'`)
 
-        res.send('수정된다 확인했다')
+        res.send('good')
     }
     catch(e) {
         console.error(e)
@@ -99,9 +100,9 @@ const comment = async (req,res) => {
 
 const commentAction = async (req, res) => {
     try{
-        const { idx, cUser, cContent, boardIdx, cLike } = req.body
+        const { cUser, cContent, boardIdx } = req.body
         console.log(boardIdx)
-        const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
+        await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
         res.json('comment success')
     }
     catch(e) {
