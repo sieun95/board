@@ -1,24 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Main from "./components/Main"
+import LogIn from './components/LogIn';
+import SignUp from './components/SignUp';
+import ResponsiveAppBar from './components/ResponsiveAppBar';
+import Chat from './components/Chat'
+import BoardWrite from './components/board/BoardWrite';
+import BoardList from './components/board/BoardList';
+import BoardView from './components/board/BoardView';
+import BoardModify from './components/board/BoardModify';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  <>
+    <ResponsiveAppBar />
+    <Routes>
+      <Route path="/" element={<Main />} />
+      <Route path='/login' element={<LogIn />} />
+      <Route path='/signup' element={<SignUp />} />
+      <Route path='/chat' element={<Chat />} />
+      <Route path='/board/write' element={<BoardWrite />} />
+      <Route path='/board/list/:page' element={<BoardList />} />
+      <Route path='/board/view/:idx' element={<BoardView />} />
+      <Route path='/board/modify/:idx' element={<BoardModify />} />
+    </Routes>
+    </>
   );
 }
 
