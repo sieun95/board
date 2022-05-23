@@ -15,7 +15,6 @@ const view = async (req, res) => {
     console.log(req.params)
     try {
         const [[result]] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
-        await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = '${req.params.idx}'`)
         res.json(result);
     } catch(e) {
         console.error(e)
@@ -121,6 +120,17 @@ const likeAction = async (req, res) => {
     }
 }
 
+const hit = async (req, res) => {
+    try {
+        const [result] =   await pool.query(`UPDATE board SET hit = hit + 1 WHERE idx = '${req.body.idx}'`)
+        console.log(result)
+        res.send('good')
+    }
+    catch(e) {
+        console.error(e)
+    }
+}
+
 
 module.exports = {
     list,
@@ -131,5 +141,6 @@ module.exports = {
     comment,
     commentAction,
     likeAction,
+    hit,
 }
 

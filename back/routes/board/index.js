@@ -15,6 +15,7 @@ router.get('/comment/:idx', boardController.comment);
 
 router.get('/like', boardController.likeAction);
 
+router.post('/hit', boardController.hit);
 
 
 module.exports = router;
