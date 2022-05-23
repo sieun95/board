@@ -44,7 +44,7 @@ export default function LogIn() {
     };
     console.log(formData)
     const result = await axios.post("http://localhost:9400/auth/login",formData)
-    if(result.data === "login success"){
+    if(result.data !== "login error"){
       localStorage.setItem("userId",data.get("userId"))   
       navigate("/")
       navigate(0)
