@@ -32,8 +32,7 @@ const BoardModify = () => {
 
   const callApi = async() => {
     const {data} = await axios.get(`http://localhost:9400/board/view/${modifyIndex}`);
-    const [datas] = data
-    setInputData(datas)
+    setInputData(data)
 }
 
   useEffect(() => {
