@@ -88,10 +88,8 @@ const modify = async (req, res) => {
 
 const comment = async (req,res) => {
     try{
-        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE idx = '${req.params.idx}'`)
-        
-        console.log('1 :')
-        console.log(req.params.idx)
+        const [comment] = await pool.query(`SELECT * FROM boardComment WHERE boardIdx = '${req.params.idx}'`)
+        console.log(comment)
         res.json(comment)
     }
     catch(e) {
@@ -102,7 +100,6 @@ const comment = async (req,res) => {
 const commentAction = async (req, res) => {
     try{
         const { idx, cUser, cContent, boardIdx, cLike } = req.body
-        console.log('2 = ')
         console.log(boardIdx)
         const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
         res.json('comment success')
@@ -111,6 +108,17 @@ const commentAction = async (req, res) => {
         console.error(e)
     }
 };
+
+const likeAction = async (req, res) => {
+    try{
+        const [result] = await pool.query(`SELECT bLike FROM userInfo`)
+        console.log(result)
+        res.json(result)
+    }
+    catch(e) {
+        console.error(e)
+    }
+}
 
 
 module.exports = {
@@ -121,5 +129,6 @@ module.exports = {
     modify,
     comment,
     commentAction,
+    likeAction,
 }
 

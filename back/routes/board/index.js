@@ -13,6 +13,7 @@ router.get('/list', boardController.list);
 router.post('/comment', boardController.commentAction);
 router.get('/comment/:idx', boardController.comment);
 
+router.get('/like', boardController.likeAction);
 
 
 
