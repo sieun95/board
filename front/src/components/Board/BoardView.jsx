@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import {useNavigate, useParams, Link} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import axios from "axios";
-import { Button, IconButton, Paper} from '@mui/material';
+import { Button,  Paper} from '@mui/material';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import { grey } from '@mui/material/colors';
@@ -107,10 +107,14 @@ const BoardView = () => {
       
 
       <Comment viewIdx={viewIdx} cUser={userId} />
-
-      <ColorButton onClick={()=>navigate(`/board/modify/${viewIdx}`)} variant="text">
-        글 수정하기
-      </ColorButton>
+      {
+        userId && userId !==undefined
+        ?
+        <ColorButton onClick={()=>navigate(`/board/modify/${viewIdx}`)} variant="text">
+          글 수정하기
+        </ColorButton>
+        : null
+      }
       <ColorButton onClick={()=>navigate(`/board/list/1`)} variant="text" >
         목록으로
       </ColorButton>
