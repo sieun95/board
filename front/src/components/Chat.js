@@ -5,8 +5,9 @@ import TextField from '@mui/material/TextField'
 const socket = io.connect('http://localhost:9400')
 
 function Chat() {
-  const [state, setState] = useState({ message: '', name: '' })
+  const [state, setState] = useState({ message: '', name: localStorage.getItem("userId")?localStorage.getItem("userId") : ''})
   const [chat, setChat] = useState([])
+
 
 
   const onTextChange = (e) => {
@@ -18,6 +19,7 @@ function Chat() {
     socket.emit('message', { name, message })
     setState({ message: '', name })
   }
+  
 
   const renderChat = () => {
     // console.log('chat : ')
