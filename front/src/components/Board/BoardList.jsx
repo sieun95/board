@@ -129,7 +129,10 @@ export default function BoardList() {
               
               <StyledTableRow
                 id={row.idx} 
-                onClick={()=>navigate(`/board/view/${row.idx}`)}
+                onClick={()=>{
+                  navigate(`/board/view/${row.idx}`)
+                  axios.post("http://localhost:9400/board/hit",{idx:row.idx})
+                }}
                 key={row.idx}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor:"pointer" }}
               >
