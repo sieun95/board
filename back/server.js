@@ -23,9 +23,13 @@ const server = app.listen(9400, () => {
 const io = require('socket.io')(server, {
     cors: { origin: '*' },
 })
-
+let sockets = []
 io.on('connection', socket => {
+    // console.log(socket, " connected")
+    sockets.push(socket)
     socket.on('message', ({ name, message }) => {
         io.emit('message', { name, message })
+        sockets.push(sockets.length)
     })
+    sockets.push(sockets.length)
 })

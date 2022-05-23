@@ -2,10 +2,12 @@ import io from 'socket.io-client';
 import { useState, useEffect } from "react";
 import TextField from '@mui/material/TextField'
 
-const socket = io.connect('http://localhost:9400')
+
 
 function Chat() {
-  const [state, setState] = useState({ message: '', name: localStorage.getItem("userId")?localStorage.getItem("userId") : ''})
+  const socket = io.connect('http://localhost:9400')
+  console.log(socket.id)
+  const [state, setState] = useState({ socketId: socket.id , message: '', name: localStorage.getItem("userId") ? localStorage.getItem("userId") : '' })
   const [chat, setChat] = useState([])
 
 
@@ -19,7 +21,7 @@ function Chat() {
     socket.emit('message', { name, message })
     setState({ message: '', name })
   }
-  
+
 
   const renderChat = () => {
     // console.log('chat : ')
@@ -35,13 +37,12 @@ function Chat() {
   useEffect(() => {
     socket.on('message', ({ name, message }) => {
       setChat([...chat, { name, message }])
-      // Uncaught TypeError: chat.map is not a function
     })
   })
 
   return (
-    <div className='card'>
-      <form onSubmit={onMessageSubmit}>
+    <div className='card' style={{ display: "flex", float: "left" }}>
+      <form onSubmit={onMessageSubmit} style={{ padding: "50px 150px 50px 150px", }}>
         <h1>Messanger</h1>
         <div className='name-field'>
           <TextField name="name" onChange={e => onTextChange(e)} value={state.name} label='Name' />
@@ -51,9 +52,12 @@ function Chat() {
         </div>
         <button>Send Message</button>
       </form>
-      <div className='render-chat'>
+      <div className='render-chat' style={{ padding: "50px 350px 50px 350px", justifyContent: "center" }}>
         <h1>Chat Log</h1>
-        {renderChat()}
+        <div style={{ height: 500, width: 250, border: "1px solid black" }}>
+          {renderChat()}
+        </div>
+
 
       </div>
     </div>
