@@ -12,6 +12,18 @@ const list = async (req, res) => {
 
 const view = async (req, res) => {
     console.log('board view')
+    console.log(req.params)
+    try {
+        const [result] = await pool.query(`SELECT * FROM board WHERE idx = '${req.params.idx}'`)
+        res.json(result);
+    } catch(e) {
+        console.error(e)
+    }
+};
+
+
+const viewAction = async (req, res) => {
+    console.log('board view')
     console.log(req.body)
     const { idx, like, userId} = req.body
     // 1. userID정보 가지고오기
@@ -44,8 +56,8 @@ const view = async (req, res) => {
     catch(e) {
         console.error(e)
     }
-
 };
+
 
 const write = async (req, res) => {
     try{
@@ -90,7 +102,6 @@ const comment = async (req,res) => {
 const commentAction = async (req, res) => {
     try{
         const { idx, cUser, cContent, boardIdx, cLike } = req.body
-        const lCount = await pool.query('')
         console.log('2 = ')
         console.log(boardIdx)
         const [comment] = await pool.query(`INSERT INTO boardComment(cUser, cContent, boardIdx) VALUES('${cUser}', '${cContent}', '${boardIdx}')`)
@@ -105,6 +116,7 @@ const commentAction = async (req, res) => {
 module.exports = {
     list,
     view,
+    viewAction,
     write,
     modify,
     comment,
