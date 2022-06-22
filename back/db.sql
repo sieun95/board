@@ -5,7 +5,8 @@ DROP TABLE userInfo;
 CREATE TABLE userInfo(  
     `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `userId` VARCHAR(255) NOT NULL,
-    `pwd` INT(11) NOT NULL
+    `pwd` INT(11) NOT NULL,
+    `blike` INT(11)
 );
 
 SELECT * FROM `userInfo`;
@@ -31,11 +32,16 @@ SELECT * FROM board;
 
 INSERT INTO board(userId, subject, content) VALUES('test', 'test', '안녕하세요 테스트입니다~~');
 
+DROP TABLE boardComment;
+
 CREATE TABLE boardComment(
-    `idx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `boardIdx` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `cUser` VARCHAR(255) NOT NULL,
     `cContent` VARCHAR(255) NOT NULL,
     `cLike` INT(11) DEFAULT 0 NOT NULL
-)
+);
+
+SELECT * FROM `boardComment`;
+
 
 
